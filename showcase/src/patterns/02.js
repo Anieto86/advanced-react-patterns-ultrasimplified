@@ -4,7 +4,7 @@
 
 //Representar los stados con componentes
 
-import React, { Component, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import mojs from '@mojs/core';
 import styles from './index.css';
 
@@ -14,90 +14,80 @@ const initialState = {
   isClicked: false,
 };
 
-//HOC
-const withClapAnimation = (WrappedComponent) => {
-  console.log({ WrappedComponent: WrappedComponent });
-  return class extends Component {
-    animationTimeline = new mojs.Timeline();
+//Custom hook for animation
+const useClapAnimation = () => {
+  const [animationTimeline, setAnimationTimeline] = useState(
+    () => new mojs.Timeline()
+  );
 
-    state = {
-      animationTimeline: this.animationTimeline,
-    };
+  useEffect(() => {
+    const tlDuration = 300;
 
-    componentDidMount() {
-      const tlDuration = 300;
+    const scaleButton = new mojs.Html({
+      el: '#clap',
+      duration: tlDuration,
+      scale: { 1.3: 1 },
+      easing: mojs.easing.ease.out,
+    });
 
-      const scaleButton = new mojs.Html({
-        el: '#clap',
-        duration: tlDuration,
-        scale: { 1.3: 1 },
+    const triangleBurst = new mojs.Burst({
+      parent: '#clap',
+      radius: { 50: 95 },
+      count: 5,
+      angle: 30,
+      children: {
+        shape: 'polygon',
+        radius: { 6: 0 },
+        stroke: 'rgba(211,54,0,0,5)',
+        strokeWidth: 2,
+        angle: 210,
+        delay: 30,
+        speed: 0.2,
         easing: mojs.easing.ease.out,
-      });
-
-      const triangleBurst = new mojs.Burst({
-        parent: '#clap',
-        radius: { 50: 95 },
-        count: 5,
-        angle: 30,
-        children: {
-          shape: 'polygon',
-          radius: { 6: 0 },
-          stroke: 'rgba(211,54,0,0,5)',
-          strokeWidth: 2,
-          angle: 210,
-          delay: 30,
-          speed: 0.2,
-          easing: mojs.easing.ease.out,
-          duration: tlDuration,
-        },
-      });
-
-      const countAnimation = new mojs.Html({
-        el: '#clapCount',
-        opacity: { 0: 1 },
         duration: tlDuration,
-        y: { 0: -30 },
-      }).then({ opacity: { 1: 0 }, delay: tlDuration / 2, y: -80 });
+      },
+    });
 
-      const countTotalAnimation = new mojs.Html({
-        el: '#clapCountTotal',
-        duration: tlDuration,
-        opacity: { 0: 1 },
-        delay: (3 * tlDuration) / 2,
-        y: { 0: -3 },
-      });
+    const countAnimation = new mojs.Html({
+      el: '#clapCount',
+      opacity: { 0: 1 },
+      duration: tlDuration,
+      y: { 0: -30 },
+    }).then({ opacity: { 1: 0 }, delay: tlDuration / 2, y: -80 });
 
-      const clap = document.getElementById('clap');
-      clap.style.transform = 'scale(1,1)';
+    const countTotalAnimation = new mojs.Html({
+      el: '#clapCountTotal',
+      duration: tlDuration,
+      opacity: { 0: 1 },
+      delay: (3 * tlDuration) / 2,
+      y: { 0: -3 },
+    });
 
-      const newAnimationTimeline = this.animationTimeline.add([
-        scaleButton,
-        countTotalAnimation,
-        countAnimation,
-        triangleBurst,
-      ]);
-      this.setState({ animationTimeline: newAnimationTimeline });
-    }
+    const clap = document.getElementById('clap');
+    clap.style.transform = 'scale(1,1)';
 
-    render() {
-      return (
-        <WrappedComponent
-          {...this.props}
-          animationTimeline={this.state.animationTimeline}
-        />
-      );
-    }
-  };
+    const newAnimationTimeline = animationTimeline.add([
+      scaleButton,
+      countTotalAnimation,
+      countAnimation,
+      triangleBurst,
+    ]);
+
+    setAnimationTimeline(newAnimationTimeline);
+  }, []);
+
+  return animationTimeline;
 };
 
-const MediumClap = ({ animationTimeline }) => {
+const MediumClap = () => {
   const MAXIMUM_USER_CLAP = 12;
   const [clapState, setClapState] = useState(initialState);
-
   const { count, countTotal, isClicked } = clapState;
 
+  const animationTimelineClap = useClapAnimation();
+
   const handleClapClick = () => {
-    animationTimeline.replay();
+    animationTimelineClap.replay();
 
     setClapState((prevState) => ({
       isClicked: true,
@@ -158,8 +148,7 @@ export const ClapTotal = ({ countTotal }) => {
 
 //Usage
 const Usage = () => {
-  const AnimatedMediumClap = withClapAnimation(MediumClap);
-  return <AnimatedMediumClap />;
+  return <MediumClap />;
 };
 
 export default Usage;

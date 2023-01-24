@@ -719,6 +719,13 @@
     "@babel/plugin-transform-react-jsx-self" "^7.7.4"
     "@babel/plugin-transform-react-jsx-source" "^7.7.4"
 
+"@babel/runtime@^7.20.6":
+  "integrity" "sha512-gt3PKXs0DBoL9xCvOIIZ2NEqAGZqHjAnmVbfQtB620V0uReIQutpel14KcneZuer7UioY8ALKZ7iocavvzTNFA=="
+  "resolved" "https://registry.npmjs.org/@babel/runtime/-/runtime-7.20.13.tgz"
+  "version" "7.20.13"
+  dependencies:
+    "regenerator-runtime" "^0.13.11"
+
 "@babel/template@^7.7.4":
   "integrity" "sha512-qUzihgVPguAzXCK7WXw8pqs6cEwi54s3E+HrejlkuWO6ivMKx9hZl3Y2fSXp9i5HgyWmj7RKP+ulaYnKM4yYxw=="
   "resolved" "https://registry.npmjs.org/@babel/template/-/template-7.7.4.tgz"
@@ -768,6 +775,13 @@
   "integrity" "sha512-kBa+cDHOR9jpRJ+kcGMsysrls0leukrm68DmFQoMIWQcXdr2cZvyvypWuGYT7U+9kAExUE7+T7r6G3C3A6L8MQ=="
   "resolved" "https://registry.npmjs.org/@emotion/unitless/-/unitless-0.7.4.tgz"
   "version" "0.7.4"
+
+"@mojs/core@^1.4.0":
+  "integrity" "sha512-/dPrnmvdosCl0sessK79VkPd3c52SuiBNyTRC4A+icNymhgA0tnNzQTEUYfkY4zsJ64da2CnEFzP7DQqEtSStA=="
+  "resolved" "https://registry.npmjs.org/@mojs/core/-/core-1.4.0.tgz"
+  "version" "1.4.0"
+  dependencies:
+    "@babel/runtime" "^7.20.6"
 
 "@reach/router@^1.2.1":
   "integrity" "sha512-kTaX08X4g27tzIFQGRukaHmNbtMYDS3LEWIS8+l6OayGIw6Oyo1HIF/JzeuR2FoF9z6oV+x/wJSVSq4v8tcUGQ=="
@@ -4213,7 +4227,7 @@
     "minimist" "0.0.8"
 
 "mo-js@^0.288.2":
-  "integrity" "sha1-ZiyAPRihEM9+Qi1WnvzeoEiAWS4= sha512-UoAtasUhUdJW1nJii4lyRUrSbstTDO6WF3+iP1fQ2y2ravcyFOJoNdmDLAZiInsnsiOiRVlhKjB2HuF23Fjghg=="
+  "integrity" "sha512-UoAtasUhUdJW1nJii4lyRUrSbstTDO6WF3+iP1fQ2y2ravcyFOJoNdmDLAZiInsnsiOiRVlhKjB2HuF23Fjghg=="
   "resolved" "https://registry.npmjs.org/mo-js/-/mo-js-0.288.2.tgz"
   "version" "0.288.2"
   dependencies:
@@ -5086,6 +5100,11 @@
   "integrity" "sha512-MguG95oij0fC3QV3URf4V2SDYGJhJnJGqvIIgdECeODCT98wSWDAJ94SSuVpYQUoTcGUIL6L4yNB7j1DFFHSBg=="
   "resolved" "https://registry.npmjs.org/regenerator-runtime/-/regenerator-runtime-0.11.1.tgz"
   "version" "0.11.1"
+
+"regenerator-runtime@^0.13.11":
+  "integrity" "sha512-kY1AZVr2Ra+t+piVaJ4gxaFaReZVH40AKNo7UCX6W+dEwBo/2oZJzqfuN1qLq1oL45o56cPaTXELwrTh8Fpggg=="
+  "resolved" "https://registry.npmjs.org/regenerator-runtime/-/regenerator-runtime-0.13.11.tgz"
+  "version" "0.13.11"
 
 "regenerator-transform@^0.14.0":
   "integrity" "sha512-flVuee02C3FKRISbxhXl9mGzdbWUVHubl1SMaknjxkFB1/iqpJhArQUvRxOOPEc/9tAiX0BaQ28FJH10E4isSQ=="

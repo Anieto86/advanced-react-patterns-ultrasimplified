@@ -16,7 +16,6 @@ const initialState = {
 
 //HOC
 const withClapAnimation = (WrappedComponent) => {
-  console.log({ WrappedComponent: WrappedComponent });
   return class extends Component {
     animationTimeline = new mojs.Timeline();
 
@@ -111,11 +110,16 @@ const MediumClap = ({ animationTimeline }) => {
   };
 
   return (
-    <button id='clap' className={styles.clap} onClick={handleClapClick}>
-      <ClapIcon isClicked={isClicked} />
-      <ClapCount count={count} />
-      <ClapTotal countTotal={countTotal} />
-    </button>
+    <>
+      <button id='clap' className={styles.clap} onClick={handleClapClick}>
+        <ClapIcon isClicked={isClicked} />
+        <ClapCount count={count} />
+        <ClapTotal countTotal={countTotal} />
+      </button>
+      <div>
+        <h1>Animated via a HOC</h1>
+      </div>
+    </>
   );
 };
 

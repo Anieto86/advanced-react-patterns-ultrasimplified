@@ -11,6 +11,7 @@ import React, {
   useMemo,
   useContext,
   useEffect,
+  useRef,
 } from 'react';
 import { useClapAnimation } from '../hook/useClapAnimation';
 import styles from './index.css';
@@ -44,8 +45,12 @@ const MediumClap = ({ children, onClap }) => {
     clapTotalEl: clapTotalRef,
   });
 
+  const componentJustMounted = useRef(true);
+  console.log({ componentJustMounted });
+
   useEffect(() => {
-    onClap && onClap({ count });
+    if (!componentJustMounted.current) onClap && onClap({ count });
+    componentJustMounted.current = false;
   }, [count]);
 
   const handleClapClick = () => {
@@ -122,6 +127,7 @@ const Usage = () => {
   const handleClap = (clapState) => {
     setCount(clapState.count);
   };
+  console.log(!!count);
   return (
     <div style={{ width: '100%' }}>
       <MediumClap onClap={handleClap}>
@@ -129,7 +135,9 @@ const Usage = () => {
         <ClapCount />
         <ClapTotal />
       </MediumClap>
-      <div className={styles.info}>{`You have clapped ${count}`}</div>
+      {!!count && (
+        <div className={styles.info}>{`You have clapped ${count} times`}</div>
+      )}
     </div>
   );
 };

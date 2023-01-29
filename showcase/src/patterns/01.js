@@ -110,7 +110,7 @@ const MediumClap = ({ animationTimeline }) => {
   };
 
   return (
-    <>
+    <div>
       <button id='clap' className={styles.clap} onClick={handleClapClick}>
         <ClapIcon isClicked={isClicked} />
         <ClapCount count={count} />
@@ -119,7 +119,7 @@ const MediumClap = ({ animationTimeline }) => {
       <div>
         <h1>Animated via a HOC</h1>
       </div>
-    </>
+    </div>
   );
 };
 

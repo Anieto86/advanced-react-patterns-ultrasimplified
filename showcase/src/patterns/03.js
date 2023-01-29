@@ -10,6 +10,7 @@ import React, {
   createContext,
   useMemo,
   useContext,
+  useEffect,
 } from 'react';
 import { useClapAnimation } from '../hook/useClapAnimation';
 import styles from './index.css';
@@ -23,10 +24,10 @@ const initialState = {
 const MediumClapContext = createContext();
 const { Provider } = MediumClapContext;
 
-const MediumClap = ({ children }) => {
+const MediumClap = ({ children, onClap }) => {
   const MAXIMUM_USER_CLAP = 50;
   const [clapState, setClapState] = useState(initialState);
-  const { count, countTotal, isClicked } = clapState;
+  const { count } = clapState;
 
   const [{ clapRef, clapCountRef, clapTotalRef }, setRefState] = useState({});
 
@@ -42,6 +43,10 @@ const MediumClap = ({ children }) => {
     countEl: clapCountRef,
     clapTotalEl: clapTotalRef,
   });
+
+  useEffect(() => {
+    onClap && onClap({ count });
+  }, [count]);
 
   const handleClapClick = () => {
     animationTimeline.replay();
@@ -110,12 +115,23 @@ const ClapTotal = () => {
 };
 
 //Usage
-const Usage = () => (
-  <MediumClap>
-    <ClapIcon />
-    <ClapCount />
-    <ClapTotal />
-  </MediumClap>
-);
+const Usage = () => {
+  const [count, setCount] = useState(0);
+
+  // por que esta funcion accede al clapState from MediumClap fn no soy funciones aisladas?
+  const handleClap = (clapState) => {
+    setCount(clapState.count);
+  };
+  return (
+    <div style={{ width: '100%' }}>
+      <MediumClap onClap={handleClap}>
+        <ClapIcon />
+        <ClapCount />
+        <ClapTotal />
+      </MediumClap>
+      <div className={styles.info}>{`You have clapped ${count}`}</div>
+    </div>
+  );
+};
 
 export default Usage;

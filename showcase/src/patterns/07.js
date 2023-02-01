@@ -1,7 +1,7 @@
 import React from 'react';
 import { useClapAnimation } from '../hook/useClapAnimation';
-import { useDOMRef } from '../hook/useDOMRef';
 import { useClapState } from '../hook/useClapState';
+import { useDOMRef } from '../hook/useDOMRef';
 import { useEffectAfterMount } from '../hook/useEffectAfterMount';
 import styles from './index.css';
 

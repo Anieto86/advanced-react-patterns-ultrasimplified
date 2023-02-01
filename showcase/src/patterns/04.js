@@ -52,7 +52,6 @@ const MediumClap = ({
   });
 
   const componentJustMounted = useRef(true);
-  console.log({ componentJustMounted });
 
   useEffect(() => {
     if (!componentJustMounted.current) onClap && onClap({ count });

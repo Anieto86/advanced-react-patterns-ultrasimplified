@@ -9,7 +9,7 @@ import React, {
 } from 'react';
 import styles from './index.css';
 import userCustomStyles from './usage.css';
-import { useClapAnimation } from '../hook/useClapAnimation';
+import useClapAnimation  from '../hook/useClapAnimation';
 
 const initialState = {
   count: 0,

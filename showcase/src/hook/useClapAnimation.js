@@ -2,7 +2,7 @@ import React, { useState, useLayoutEffect } from 'react';
 import mojs from '@mojs/core';
 
 //Custom hook for animation
-export const useClapAnimation = ({ clapEl, countEl, clapTotalEl }) => {
+const useClapAnimation = ({ clapEl, countEl, clapTotalEl }) => {
   const [animationTimeline, setAnimationTimeline] = useState(
     () => new mojs.Timeline()
   );
@@ -71,3 +71,6 @@ export const useClapAnimation = ({ clapEl, countEl, clapTotalEl }) => {
 
   return animationTimeline;
 };
+
+
+export default useClapAnimation

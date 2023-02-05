@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import  { useCallback, useEffect, useRef, useState } from 'react';
 
 const INITIAL_STATE = {
   count: 0,
@@ -6,11 +6,21 @@ const INITIAL_STATE = {
   isClicked: false,
 };
 
-export const useClapState = (initialState = INITIAL_STATE) => {
+
+const usePrevious = (value) => {
+  const ref = useRef();
+  useEffect(()=>{
+    ref.current = value;
+  })
+  return ref.current
+}
+
+ const useClapState = (initialState = INITIAL_STATE) => {
   const MAXIMUM_USER_CLAP = 50;
+  const userInitialState = useRef(initialState)
   const [clapState, setClapState] = useState(initialState);
 
-  const { count, isClicked } = clapState;
+  const { count,  countTotal } = clapState;
 
   const updateClapState = () => {
     setClapState((prevState) => ({
@@ -23,5 +33,18 @@ export const useClapState = (initialState = INITIAL_STATE) => {
     }));
   };
 
-  return [clapState, updateClapState];
+  const resetRef = useRef(0)
+  const prevCount = usePrevious(count)
+  const handleReset= useCallback(()=> {
+    if (prevCount !== count) {
+      console.log({prevCount, count})
+      setClapState(userInitialState.current)
+      resetRef.current++
+    }
+  }, [prevCount,count, setClapState])
+
+  return [clapState, updateClapState, handleReset, {resetDep : resetRef.current}];
 };
+
+
+export default useClapState

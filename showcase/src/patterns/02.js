@@ -5,7 +5,7 @@
 //Representar los stados con componentes
 
 import React, { useState, useCallback } from 'react';
-import { useClapAnimation } from '../hook/useClapAnimation';
+import useClapAnimation from '../hook/useClapAnimation';
 import styles from './index.css';
 
 const initialState = {

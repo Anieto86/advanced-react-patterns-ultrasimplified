@@ -13,7 +13,7 @@ import React, {
   useEffect,
   useRef,
 } from 'react';
-import { useClapAnimation } from '../hook/useClapAnimation';
+import useClapAnimation  from '../hook/useClapAnimation';
 import styles from './index.css';
 import userCustomStyles from './usage.css';
 

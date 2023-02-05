@@ -1,6 +1,6 @@
-import React, { useState, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 
-export const useDOMRef = () => {
+const  useDOMRef = () => {
   const [DOMRef, setRefState] = useState({});
 
   const setRef = useCallback((node) => {
@@ -12,3 +12,5 @@ export const useDOMRef = () => {
 
   return [DOMRef, setRef];
 };
+
+export default  useDOMRef

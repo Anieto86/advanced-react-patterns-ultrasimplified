@@ -1,17 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import useClapAnimation  from '../hook/useClapAnimation';
-import useClapState  from '../hook/useClapState';
+import useClapStateReducer  from '../hook/useClapStateReducer';
 import useDOMRef  from '../hook/useDOMRef';
 import useEffectAfterMount  from '../hook/useEffectAfterMount';
 import styles from './index.css';
+import userCustomStyles from './usage.css';
 
-//cunsto hook uséEffectAfterMount
 
 const MediumClap = () => {
-  const [clapState, updateClapState] = useClapState();
-  const { count, countTotal, isClicked } = clapState;
-
+  const [clapState, updateClapState ,  handleReset , resetDep] = useClapStateReducer();
   const [{ clapRef, clapCountRef, clapTotalRef }, setRef] = useDOMRef();
+  const [uploadingReset, setUpload] = useState(false)
+
+  const { count, countTotal, isClicked } = clapState;
 
   const animationTimeline = useClapAnimation({
     clapEl: clapRef,
@@ -23,7 +24,23 @@ const MediumClap = () => {
     animationTimeline.replay();
   }, [count]);
 
+
+  useEffectAfterMount(() => {
+    //no cambia el valor a true
+    setUpload(true)
+
+    const id = setTimeout(() => {
+      setUpload(false)
+    }, 3000)
+
+    return () => clearTimeout(id)
+  }, [resetDep])
+
+
+
   return (
+    <>
+     <section>
     <button
       ref={setRef}
       data-refkey='clapRef'
@@ -34,6 +51,12 @@ const MediumClap = () => {
       <ClapCount count={count} setRef={setRef} />
       <ClapTotal countTotal={countTotal} setRef={setRef} />
     </button>
+   
+      <button onClick={handleReset} className={userCustomStyles.resetBtn} >reset</button>
+      <pre >{JSON.stringify({count, countTotal,  isClicked})}</pre>
+      <pre>  {uploadingReset ? `uploading reset ${resetDep} ...` : ''}</pre>
+    </section>
+    </>
   );
 };
 
@@ -63,7 +86,8 @@ const ClapCount = ({ count, setRef }) => {
 
 const ClapTotal = ({ countTotal, setRef }) => {
   return (
-    <span ref={setRef} data-refkey='clapTotalRef' className={styles.total}>
+    <span ref={setRef} data-refkey='clapTotalRef' className= 
+        {styles.total}>
       {countTotal}
     </span>
   );

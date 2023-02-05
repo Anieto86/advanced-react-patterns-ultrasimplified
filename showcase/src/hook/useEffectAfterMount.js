@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-export const useEffectAfterMount = (cb, deps) => {
+const  useEffectAfterMount = (cb, deps) => {
   const componentJustMounted = useRef(true);
   useEffect(() => {
     if (!componentJustMounted.current) {
@@ -9,3 +9,5 @@ export const useEffectAfterMount = (cb, deps) => {
     componentJustMounted.current = false;
   }, deps);
 };
+
+export default  useEffectAfterMount

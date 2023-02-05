@@ -1,11 +1,11 @@
 import React from 'react';
-import { useClapAnimation } from '../hook/useClapAnimation';
-import { useClapState } from '../hook/useClapState';
-import { useDOMRef } from '../hook/useDOMRef';
-import { useEffectAfterMount } from '../hook/useEffectAfterMount';
+import useClapAnimation  from '../hook/useClapAnimation';
+import useClapState  from '../hook/useClapState';
+import useDOMRef  from '../hook/useDOMRef';
+import useEffectAfterMount  from '../hook/useEffectAfterMount';
 import styles from './index.css';
 
-//cunsto hook uséEffectAfterMount
+//custom hook uséEffectAfterMount
 
 const MediumClap = () => {
   const [clapState, updateClapState] = useClapState();

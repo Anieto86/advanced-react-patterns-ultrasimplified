@@ -1,11 +1,15 @@
-import React, { useState, useLayoutEffect } from 'react';
+import  { useState, useLayoutEffect } from 'react';
 import mojs from '@mojs/core';
 
-//Custom hook for animation
+
 const useClapAnimation = ({ clapEl, countEl, clapTotalEl }) => {
-  const [animationTimeline, setAnimationTimeline] = useState(
-    () => new mojs.Timeline()
-  );
+//Note  
+// como no quiero crear un obj ( new mojs.Timeline() ) cada vez que que se llama el useState ,
+//  eso es muy costoso.  No se pasan funciones asi nomas en el useStatate se inicializan con un callback 
+//  Solucion :  inicializamos  con una funcion  () => new mojs.Timeline()
+
+
+  const [animationTimeline, setAnimationTimeline] = useState(() => new mojs.Timeline());
 
   useLayoutEffect(() => {
     if (!clapEl || !countEl || !clapTotalEl) {

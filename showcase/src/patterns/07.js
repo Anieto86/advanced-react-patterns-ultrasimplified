@@ -1,8 +1,8 @@
 import React from 'react';
-import useClapAnimation  from '../hook/useClapAnimation';
-import useClapState  from '../hook/useClapState';
-import useDOMRef  from '../hook/useDOMRef';
-import useEffectAfterMount  from '../hook/useEffectAfterMount';
+import useClapAnimation  from '../hooks/useClapAnimation';
+import useClapState  from '../hooks/useClapState';
+import useDOMRef  from '../hooks/useDOMRef';
+import useEffectAfterMount  from '../hooks/useEffectAfterMount';
 import styles from './index.css';
 
 //custom hook uséEffectAfterMount

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import useClapAnimation  from '../hook/useClapAnimation';
-import useClapStateReducer  from '../hook/useClapStateReducer';
-import useDOMRef  from '../hook/useDOMRef';
-import useEffectAfterMount  from '../hook/useEffectAfterMount';
+import useClapAnimation  from '../hooks/useClapAnimation';
+import useClapStateReducer  from '../hooks/useClapStateReducer';
+import useDOMRef  from '../hooks/useDOMRef';
+import useEffectAfterMount  from '../hooks/useEffectAfterMount';
 import styles from './index.css';
 import userCustomStyles from './usage.css';
 

@@ -15,7 +15,7 @@ import React, {
 } from 'react';
 import ClapIcon from '../content/Components/ClapIcon'
 
-import useClapAnimation  from '../hook/useClapAnimation';
+import useClapAnimation  from '../hooks/useClapAnimation';
 import styles from './index.css';
 
 const initialState = {

@@ -23,7 +23,7 @@ const MediumClap = () => {
   const { count, countTotal, isClicked } = clapState;
 
 
-  //Note otra es lo mismo que el codigo comentado abbajo pero utilizando useRef hook 
+  //Note otra es lo mismo que el codigo comentado abbajo pero utilizando useRef hook
   const clapRef = useRef(null);
   const clapCountRef = useRef(null);
   const clapTotalRef = useRef(null);

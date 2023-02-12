@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react';
+import {MediumClapContext} from '../../patterns/03';
 import styles from '../../patterns/index.css';
 
-const ClapTotal = ({ countTotal, setRef}) => {
+const ClapTotal = () => {
+  const{ countTotal, setRef} = useContext(MediumClapContext);
   return (
     <span ref={setRef} 
      data-refkey='clapTotalRef' 

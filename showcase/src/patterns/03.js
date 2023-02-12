@@ -1,9 +1,3 @@
-//1th states default state unclicked
-//2th state when the clap count
-//3th state clap total
-
-//Representar los stados con componentes
-
 import React, {
   useState,
   useCallback,
@@ -14,7 +8,8 @@ import React, {
   useRef,
 } from 'react';
 import ClapIcon from '../content/Components/ClapIcon'
-
+import ClapCount from '../content/Components/ClapCount'
+import ClapTotal from '../content/Components/ClapTotal'
 import useClapAnimation  from '../hooks/useClapAnimation';
 import styles from './index.css';
 
@@ -24,8 +19,8 @@ const initialState = {
   isClicked: false,
 };
 
-const MediumClapContext = createContext();
-const { Provider } = MediumClapContext;
+
+export const MediumClapContext = createContext(initialState);
 
 const MediumClap = ({ children, onClap }) => {
   const MAXIMUM_USER_CLAP = 50;
@@ -72,8 +67,10 @@ const MediumClap = ({ children, onClap }) => {
     [clapState, setRef]
   );
 
+
+
   return (
-    <Provider value={memorizeValue}>
+    <MediumClapContext.Provider value={memorizeValue}>
       <button
         ref={setRef}
         data-refkey='clapRef'
@@ -82,30 +79,10 @@ const MediumClap = ({ children, onClap }) => {
       >
         {children}
       </button>
-    </Provider>
+    </MediumClapContext.Provider>
   );
 };
 
-// subComponent;
-
-
-const ClapCount = () => {
-  const { count, setRef } = useContext(MediumClapContext);
-  return (
-    <span ref={setRef} data-refkey='clapCountRef' className={styles.count}>
-      + {count}
-    </span>
-  );
-};
-
-const ClapTotal = () => {
-  const { countTotal, setRef } = useContext(MediumClapContext);
-  return (
-    <span ref={setRef} data-refkey='clapTotalRef' className={styles.total}>
-      {countTotal}
-    </span>
-  );
-};
 
 //Usage
 const Usage = () => {
@@ -115,7 +92,7 @@ const Usage = () => {
   const handleClap = (clapState) => {
     setCount(clapState.count);
   };
-  console.log(!!count);
+  
   return (
     <div style={{ width: '100%' }}>
       <MediumClap onClap={handleClap}>
@@ -131,3 +108,24 @@ const Usage = () => {
 };
 
 export default Usage;
+
+
+
+// subComponent;
+// const ClapCount = () => {
+//   const { count, setRef } = useContext(MediumClapContext);
+//   return (
+//     <span ref={setRef} data-refkey='clapCountRef' className={styles.count}>
+//       + {count}
+//     </span>
+//   );
+// };
+
+// const ClapTotal = () => {
+//   const { countTotal, setRef } = useContext(MediumClapContext);
+//   return (
+//     <span ref={setRef} data-refkey='clapTotalRef' className={styles.total}>
+//       {countTotal}
+//     </span>
+//   );
+// };

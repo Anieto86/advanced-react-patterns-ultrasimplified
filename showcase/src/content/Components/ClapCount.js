@@ -1,16 +1,15 @@
-import React from 'react'
+import React, { useContext } from 'react';
+import {MediumClapContext} from '../../patterns/03';
 import styles from '../../patterns/index.css';
 
-const ClapCount = ({ count, setRef }) => {
-  
+const ClapCount = () => {
+  const { count, setRef } = useContext(MediumClapContext);
+ 
   return (
-    <span ref={setRef} 
-    data-refkey='clapCountRef'
-    className={styles.count}>
+    <span ref={setRef} data-refkey='clapCountRef' className={styles.count}>
       + {count}
     </span>
   );
 };
 
-
-export default ClapCount
+export default ClapCount;

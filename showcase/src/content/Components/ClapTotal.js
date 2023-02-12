@@ -3,6 +3,7 @@ import {MediumClapContext} from '../../patterns/03';
 import styles from '../../patterns/index.css';
 
 const ClapTotal = () => {
+
   const{ countTotal, setRef} = useContext(MediumClapContext);
   return (
     <span ref={setRef} 

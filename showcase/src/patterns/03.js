@@ -3,7 +3,6 @@ import React, {
   useCallback,
   createContext,
   useMemo,
-  useContext,
   useEffect,
   useRef,
 } from 'react';
@@ -42,13 +41,18 @@ const MediumClap = ({ children, onClap }) => {
     clapTotalEl: clapTotalRef,
   });
 
+  //Note We use useRef here for invoke useEffect callback only after mount, basicamente skip la primera invoke 
   const componentJustMounted = useRef(true);
   console.log({ componentJustMounted });
 
   useEffect(() => {
+    //despues del render  !componentJustMounted.current = true entonce no el llamado onClap 
     if (!componentJustMounted.current) onClap && onClap({ count });
+    //salgp del if in cambio el valor a false.
+    // La segunda vuelta !false === true por lo tanto el onClap esi invocado y dispara se toca el botton. 
     componentJustMounted.current = false;
   }, [count]);
+//
 
   const handleClapClick = () => {
     animationTimeline.replay();
@@ -62,12 +66,11 @@ const MediumClap = ({ children, onClap }) => {
     }));
   };
 
+
   const memorizeValue = useMemo(
     () => ({ ...clapState, setRef }),
     [clapState, setRef]
   );
-
-
 
   return (
     <MediumClapContext.Provider value={memorizeValue}>
@@ -88,7 +91,7 @@ const MediumClap = ({ children, onClap }) => {
 const Usage = () => {
   const [count, setCount] = useState(0);
 
-  // por que esta funcion accede al clapState from MediumClap fn no soy funciones aisladas?
+  // por que esta funcion accede al clapState from MediumClap fn no soy funciones aisladas? Clousers? 
   const handleClap = (clapState) => {
     setCount(clapState.count);
   };
